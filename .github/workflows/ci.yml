@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: credex-audit/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: credex-audit
+
+      - name: Run ESLint
+        run: npm run lint
+        working-directory: credex-audit
+
+      - name: Run tests
+        run: npm test -- --passWithNoTests
+        working-directory: credex-audit
+        env:
+          # No secrets needed for audit engine tests
+          CI: true
