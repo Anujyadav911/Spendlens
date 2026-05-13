@@ -20,7 +20,15 @@ export async function GET(req: NextRequest) {
     if (error) throw error;
 
     // Standardization Layer & Smart Matching Logic
-    const processedData = (data as any[]).map((tool) => {
+    interface Tool {
+      billing_type: string;
+      price_monthly: number;
+      price_input: number;
+      price_output: number;
+      [key: string]: any;
+    }
+
+    const processedData = (data as unknown as Tool[]).map((tool) => {
       // SpendLens Index: Monthly Cost per Developer (MCPD)
       // Assumption: Heavy dev uses 4M Input / 1M Output tokens per month.
       let mcpd = 0;
@@ -40,7 +48,7 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json({ results: processedData });
-  } catch (err) {
+  } catch (err: unknown) {
     const error = err as Error;
     console.error("[Search API Error]", error);
     return NextResponse.json({ error: error.message }, { status: 500 });

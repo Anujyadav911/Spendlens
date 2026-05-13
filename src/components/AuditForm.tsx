@@ -31,7 +31,7 @@ export default function AuditForm() {
     reset,
     formState: { errors },
   } = useForm<AuditFormData>({
-    resolver: zodResolver(AuditFormSchema) as any,
+    resolver: zodResolver(AuditFormSchema),
     defaultValues: {
       tools: [{ toolId: "cursor", planId: "cursor-pro", seats: 3, monthlySpend: 0 }],
       teamSize: 5,
@@ -62,8 +62,8 @@ export default function AuditForm() {
 
   // Listen for Live Market Rates drawer selection
   useEffect(() => {
-    const handleAddTool = (e: any) => {
-      const tool = e.detail;
+    const handleAddTool = (e: Event) => {
+      const tool = (e as CustomEvent).detail;
       // Find matching tool in our static registry
       const existingTool = TOOLS.find(t => t.id === tool.id || t.name === tool.display_name);
       

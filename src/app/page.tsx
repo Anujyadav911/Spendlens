@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import AuditForm from "@/components/AuditForm";
 import PricingDrawer from "@/components/PricingDrawer";
 import { Zap, Shield, TrendingDown, ArrowDown, Signal } from "lucide-react";

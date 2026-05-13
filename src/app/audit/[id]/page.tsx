@@ -44,20 +44,21 @@ export default function AuditPage() {
         if (!res.ok) throw new Error("Audit not found");
         return res.json();
       })
-      .then((result) => {
+      .then((result: unknown) => {
         // For public shareable URLs, we only have the result (no input PII)
         // Build a minimal input from the result for the display
+        const r = result as AuditResult & { teamSize?: number; useCase?: string };
         const minimalInput: AuditInput = {
-          tools: result.toolResults.map((r: { toolId: string }) => ({
-            toolId: r.toolId,
+          tools: r.toolResults.map((tr: { toolId: string }) => ({
+            toolId: tr.toolId,
             planId: "",
             seats: 1,
             monthlySpend: 0,
           })),
-          teamSize: result.teamSize ?? 1,
-          useCase: result.useCase ?? "mixed",
+          teamSize: r.teamSize ?? 1,
+          useCase: r.useCase ?? "mixed",
         };
-        setData({ input: minimalInput, result });
+        setData({ input: minimalInput, result: r });
         setLoading(false);
       })
       .catch((err) => {
