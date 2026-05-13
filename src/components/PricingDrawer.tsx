@@ -12,6 +12,7 @@ type Tool = {
   provider: string;
   billing_type: "token" | "seat";
   price_input: number;
+  price_output: number;
   price_monthly: number;
   last_synced_at: string;
   mcpd?: number;
@@ -53,7 +54,7 @@ const containerAnim = {
 
 const itemAnim = {
   hidden: { opacity: 0, y: 15 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300, damping: 24 } }
 };
 
 export default function PricingDrawer({ 

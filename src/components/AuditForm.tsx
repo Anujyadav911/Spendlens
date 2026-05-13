@@ -31,7 +31,8 @@ export default function AuditForm() {
     reset,
     formState: { errors },
   } = useForm<AuditFormData>({
-    resolver: zodResolver(AuditFormSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(AuditFormSchema) as any,
     defaultValues: {
       tools: [{ toolId: "cursor", planId: "cursor-pro", seats: 3, monthlySpend: 0 }],
       teamSize: 5,

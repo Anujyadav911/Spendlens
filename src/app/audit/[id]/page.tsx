@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { AuditResult, AuditInput } from "@/lib/audit-engine";
+import { AuditResult, AuditInput, UseCase } from "@/lib/audit-engine";
 import { AuditSummary, generateAISummary } from "@/lib/ai-summary";
 import AuditResultsDisplay from "@/components/AuditResultsDisplay";
 import { Zap, ArrowLeft, Loader2 } from "lucide-react";
@@ -183,7 +183,6 @@ export default function AuditPage() {
 
         <AuditResultsDisplay
           result={data.result}
-          input={data.input}
           auditId={id}
           summary={summary}
         />
