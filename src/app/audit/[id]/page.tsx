@@ -56,7 +56,7 @@ export default function AuditPage() {
             monthlySpend: 0,
           })),
           teamSize: r.teamSize ?? 1,
-          useCase: r.useCase ?? "mixed",
+          useCase: (r.useCase as UseCase) ?? "mixed",
         };
         setData({ input: minimalInput, result: r });
         setLoading(false);
