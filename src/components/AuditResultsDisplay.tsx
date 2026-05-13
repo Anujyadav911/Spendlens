@@ -9,7 +9,6 @@ import {
 import { AuditSummary } from "@/lib/ai-summary";
 import { formatCurrency } from "@/lib/utils";
 import {
-  TrendingDown,
   CheckCircle2,
   AlertTriangle,
   AlertCircle,
@@ -60,16 +59,8 @@ const SEVERITY_CONFIG = {
   },
 };
 
-function getRecommendationText(r: ToolAuditResult): string {
-  const rec = r.recommendation;
-  if (rec.type === "optimal") return rec.reason;
-  if (rec.type === "downgrade") return `Downgrade to a lower plan`;
-  if (rec.type === "switch") return `Switch to a better-fit tool`;
-  if (rec.type === "credits") return `Buy credits at a discount`;
-  return "";
-}
 
-export default function AuditResultsDisplay({ result, input, auditId, summary }: Props) {
+export default function AuditResultsDisplay({ result, auditId, summary }: Omit<Props, 'input'>) {
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [copied, setCopied] = useState(false);
 

@@ -29,6 +29,7 @@ export default function AuditPage() {
     if (cached) {
       try {
         const parsed = JSON.parse(cached);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setData(parsed);
         setLoading(false);
         // Generate AI summary in background

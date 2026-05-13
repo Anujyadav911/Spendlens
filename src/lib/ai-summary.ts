@@ -5,9 +5,6 @@ export type AuditSummary = {
   source: "ai" | "template";
 };
 
-const SYSTEM_PROMPT = `You are a financial advisor specializing in AI tooling costs for startups and engineering teams. Your job is to write a concise, personalized audit summary paragraph for a startup founder or engineering manager.
-
-Be specific with numbers. Tone: direct, empathetic, professional — like a trusted CFO, not a marketer. Do not use bullet points. Write exactly one paragraph of 80-120 words. Do not recommend or mention Credex by name.`;
 
 export function buildUserPrompt(input: AuditInput, result: AuditResult): string {
   const toolLines = result.toolResults

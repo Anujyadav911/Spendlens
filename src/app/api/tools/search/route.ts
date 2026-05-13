@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     if (error) throw error;
 
     // Standardization Layer & Smart Matching Logic
-    const processedData = data.map((tool: any) => {
+    const processedData = (data as any[]).map((tool) => {
       // SpendLens Index: Monthly Cost per Developer (MCPD)
       // Assumption: Heavy dev uses 4M Input / 1M Output tokens per month.
       let mcpd = 0;
@@ -40,8 +40,9 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json({ results: processedData });
-  } catch (err: any) {
-    console.error("[Search API Error]", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    const error = err as Error;
+    console.error("[Search API Error]", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

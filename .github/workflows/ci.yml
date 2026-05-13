@@ -24,15 +24,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: credex-audit
 
       - name: Run ESLint
         run: npm run lint
-        working-directory: credex-audit
 
       - name: Run tests
         run: npm test -- --passWithNoTests
-        working-directory: credex-audit
         env:
           # No secrets needed for audit engine tests
           CI: true
